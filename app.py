@@ -20,10 +20,5 @@ class Textdiff:
         for k, v in match_dict.items():
             print(f"row : {k}, value: {v}")
 
-
-
-
-
-
 obj_ref = Textdiff()
 obj_ref._own_method()
