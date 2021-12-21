@@ -8,10 +8,8 @@ table, th, td {
 }
 th, td {
   padding-top: 10px;
-  padding-bottom: 20px;
-  padding-left: 30px;
-  padding-right: 40px;
-}
+  padding-bottom: 10px;
+}   
 </style>
 </head>
 <body>
@@ -31,9 +29,26 @@ th, td {
 #         html += "<td>{}</td>".format('<br>'.join(f for f in d[fruit] if ".{}.".format(state) in f))
 #     html += "</tr>"
 # html += "</table></html>"
+key, value = 1, "dhina"
+html += "<tr>"
+html += "<td>File1</td>"
+html += "<td>{}</td>".format(value)
+html += "<td>{}</td>".format(key)
+html += """<td bgcolor="red">{}</td>""".format("FAIL")
+html += "</tr>"
+html += "</body>"
+html += "</table></html>"
 
+# < tr >
+# < td > File1 < / td >
+# < td > dhina < / td >
+# < td > 10 < / td >
+# < td
+# bgcolor = "red" > Fail < / td >
+# < / tr >
 
-print(html)
+with open('test2.html', 'w') as file:
+    file.writelines(html)
 
 
 
