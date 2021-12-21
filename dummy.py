@@ -1,6 +1,5 @@
-d = {'kiwi': ['kiwi.good.svg'], 'apple': ['apple.good.2.svg', 'apple.good.1.svg'], 'banana': ['banana.1.ugly.svg', 'banana.bad.2.svg']}
 
-html = """<html>
+html_txt = """<html>
 <head>
 <style>
 table, th, td {
@@ -23,21 +22,16 @@ th, td {
     <th>Rownumber</th>
     <th>Result</th>
   </tr>"""
-# for fruit in d:
-#     html += "<tr><td>{}</td>".format(fruit)
-#     for state in "VALUES", "ROW NUMBER", "RESULT":
-#         html += "<td>{}</td>".format('<br>'.join(f for f in d[fruit] if ".{}.".format(state) in f))
-#     html += "</tr>"
-# html += "</table></html>"
+
 key, value = 1, "dhina"
-html += "<tr>"
-html += "<td>File1</td>"
-html += "<td>{}</td>".format(value)
-html += "<td>{}</td>".format(key)
-html += """<td bgcolor="red">{}</td>""".format("FAIL")
-html += "</tr>"
-html += "</body>"
-html += "</table></html>"
+html_txt += "<tr>"
+html_txt += "<td>File1</td>"
+html_txt += "<td>{}</td>".format(value)
+html_txt += "<td>{}</td>".format(key)
+html_txt += """<td bgcolor="red">{}</td>""".format("FAIL")
+html_txt += "</tr>"
+html_txt += "</body>"
+html_txt += "</table></html>"
 
 # < tr >
 # < td > File1 < / td >
@@ -47,8 +41,15 @@ html += "</table></html>"
 # bgcolor = "red" > Fail < / td >
 # < / tr >
 
-with open('test2.html', 'w') as file:
-    file.writelines(html)
+# for fruit in d:
+#     html += "<tr><td>{}</td>".format(fruit)
+#     for state in "VALUES", "ROW NUMBER", "RESULT":
+#         html += "<td>{}</td>".format('<br>'.join(f for f in d[fruit] if ".{}.".format(state) in f))
+#     html += "</tr>"
+# html += "</table></html>"
+
+# with open('test2.html', 'w') as file:
+#     file.writelines(html)
 
 
 
