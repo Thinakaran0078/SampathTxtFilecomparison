@@ -48,7 +48,7 @@ html_txt += "</table></html>"
 #     html += "</tr>"
 # html += "</table></html>"
 
-# with open('test2.html', 'w') as file:
+# with open('fail.html', 'w') as file:
 #     file.writelines(html)
 
 

@@ -37,6 +37,8 @@ class Textdiff:
                 if data_list_1[i] == data_list_2[j]:
                     counter += counter + 1
                     pass_dict[j+1] = data_list_2[j]
+
+                    # TODO : pass html file need to be created here
             if counter == 0:
                 fail_dict[i+1] = data_list_1[i]
                 html_txt += "<tr>"
@@ -52,7 +54,7 @@ class Textdiff:
         html_txt += "</table>"
         html_txt += "</body></html>"
 
-        with open('test2.html', 'w') as file:
+        with open('fail.html', 'w') as file:
             file.writelines(html_txt)
 
         print("[Pass]The data comparison from file1 against file2[with repetitions]: ")
