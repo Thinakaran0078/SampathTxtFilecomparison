@@ -43,9 +43,6 @@ class Textdiff:
                         pass_list.append(j + 1)
                     else:
                         pass_list.append(j+1)
-                    #pass_dict[j+1] = data_list_2[j]
-
-                    # TODO : pass html file need to be created here
             if counter == 0:
                 fail_dict[i+1] = data_list_1[i]
                 html_txt += "<tr>"
@@ -54,34 +51,40 @@ class Textdiff:
                 html_txt += "<td>{}</td>".format(i+1)
                 html_txt += """<td bgcolor="red">{}</td>""".format("FAIL")
                 html_txt += "</tr>"
-                print(fail_dict)
+                #print(fail_dict)
 
             else:
-                #print("[Pass]The data comparison from file1 against file2[with repetitions]: ")
-                print(pass_list)
-                print(len(pass_list))
+                #print(pass_list)
+                #print(len(pass_list))
+                file2_occ_len = len(pass_list) - 3
+                #print(file2_occ_len)
+                file2_pass_list = (pass_list[2:])
+                #print(file2_pass_list)
 
                 html_txt1 += "<tr>"
                 html_txt1 += "<td>File1</td>"
                 html_txt1 += "<td>{}</td>".format(pass_list[1])
                 html_txt1 += "<td>{}</td>".format(pass_list[0])
-                html_txt1 += """<td rowspan="2" bgcolor="green">{}</td>""".format('PASS')
+                if len(pass_list) == 3:
+                    html_txt1 += """<td rowspan="2" bgcolor="green">PASS</td>"""
+                else:
+                    html_txt1 += """<td rowspan="{}" bgcolor="green">PASS</td>""".format(2 + file2_occ_len)
                 html_txt1 += "</tr>"
 
                 if len(pass_list) == 3:
+                    #the row number of file1 data
                     html_txt1 += "<tr>"
                     html_txt1 += "<td>File2</td>"
                     html_txt1 += "<td>{}</td>".format(pass_list[1])
                     html_txt1 += "<td>{}</td>".format(pass_list[2])
-                    html_txt1 += """<td bgcolor="green">{}</td>""".format('PASS')
                     html_txt1 += "</tr>"
                 else:
-                    for rows in pass_list:
+                    #the row numbers of fil2 data findings"
+                    for rows in range(len(file2_pass_list)):
                         html_txt1 += "<tr>"
                         html_txt1 += "<td>File2</td>"
                         html_txt1 += "<td>{}</td>".format(pass_list[1])
-                        html_txt1 += "<td>{}</td>".format(pass_list[0])
-                        html_txt1 += """<td bgcolor="green">{}</td>""".format('PASS')
+                        html_txt1 += "<td>{}</td>".format(file2_pass_list[rows])
                         html_txt1 += "</tr>"
 
                 pass_list = []
