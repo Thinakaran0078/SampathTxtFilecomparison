@@ -34,6 +34,7 @@ class Textdiff:
             data_list_2 = file_2.readlines()
 
         for i in range(len(data_list_1)):
+            print(f"file1 lines processed : {i+1}")
             for j in range(len(data_list_2)):
                 if data_list_1[i] == data_list_2[j]:
                     counter += 1
@@ -97,10 +98,14 @@ class Textdiff:
         html_txt1 += "</body></html>"
 
         with open('fail.html', 'w') as file:
+            print("Writing to fail.html file...")
             file.writelines(html_txt)
+        print("fail.html created")
 
         with open('pass.html', 'w') as file:
+            print("Writing to pass.html file...")
             file.writelines(html_txt1)
+        print("pass.html created")
 
 
 obj_ref = Textdiff()
