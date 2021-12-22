@@ -28,9 +28,11 @@ class Textdiff:
         html_txt1 = html_txt
 
         fail_dict, pass_dict, counter = {}, {}, 0
-        pass_list = []
+        pass_list_file1 = []
+        pass_list_file2 = []
         pass_set = {}
         j_count = 0
+        data = ""
 
         with open('file1.txt') as file_1, open('file2.txt') as file_2:
             data_list_1 = file_1.readlines()
@@ -39,9 +41,12 @@ class Textdiff:
         for i in range(len(data_list_1)):
             for j in range(len(data_list_2)):
                 if data_list_1[i] == data_list_2[j]:
-                    counter += counter + 1
-                    pass_set = {data_list_2[j]}
-                    pass_set.add(j+1)
+                    counter += 1
+                    if len(pass_list_file2) == 0:
+                        pass_list_file2.append(data_list_2[j])
+                        pass_list_file2.append(j + 1)
+                    else:
+                        pass_list_file2.append(j+1)
                     #pass_dict[j+1] = data_list_2[j]
 
                     # TODO : pass html file need to be created here
@@ -55,8 +60,9 @@ class Textdiff:
                 html_txt += "</tr>"
 
             else:
-                print(pass_set)
-                pass_set.clear()
+                print("[Pass]The data comparison from file1 against file2[with repetitions]: ")
+                print(pass_list_file2)
+                pass_list_file2 = []
                 counter = 0
 
         html_txt += "</table>"
@@ -64,11 +70,6 @@ class Textdiff:
 
         with open('fail.html', 'w') as file:
             file.writelines(html_txt)
-
-        print("[Pass]The data comparison from file1 against file2[with repetitions]: ")
-        for k, v in pass_dict.items():
-            print(f"row : {k}, value: {v}")
-        print(pass_dict)
 
         print("[Fail]The data comparison from file1 against file2[with repetitions]: ")
         for k, v in fail_dict.items():
