@@ -2,15 +2,27 @@ class Textdiff:
 
     def file_comparison(self, file1, file2, file_no):
         html_txt = """
-
         <table>
           <tr>
-            <th>Filename</th>
+            <th>File Name</th>
             <th>Values</th>
-            <th>Rownumber</th>
+            <th>Row number</th>
             <th>Result</th>
-          </tr>"""
+          </tr>
+        """
         html_txt1 = html_txt
+
+        html_pass_txt = """
+        <table>
+          <tr>
+            <th>File 1 Value</th>
+            <th>File 1 Row</th>
+            <th>File 2 Value</th>
+            <th>File 2 Row(s)</th>
+            <th>Rows Matched</th>
+            <th>Result</th>
+          </tr>
+        """
 
         fail_dict, pass_dict, counter, fail_row_count, pass_row_count = {}, {}, 0, 0, 0
         pass_list = []
@@ -50,43 +62,39 @@ class Textdiff:
                 file2_occ_len = len(pass_list) - 3
                 file2_pass_list = (pass_list[2:])
 
-                html_txt1 += "<tr>"
-                html_txt1 += "<td>File{}</td>".format(file_comp_1)
-                html_txt1 += "<td>{}</td>".format(pass_list[1])
-                html_txt1 += "<td>{}</td>".format(pass_list[0])
-                if len(pass_list) == 3:
-                    html_txt1 += """<td rowspan="2" bgcolor="green">PASS</td>"""
-                else:
-                    html_txt1 += """<td rowspan="{}" bgcolor="green">PASS</td>""".format(2 + file2_occ_len)
-                html_txt1 += "</tr>"
+                html_pass_txt += "<tr>"
+                html_pass_txt += "<td>{}</td>".format(pass_list[1])
+                html_pass_txt += "<td>{}</td>".format(pass_list[0])
+                html_pass_txt += "<td>{}</td>".format(pass_list[1])
 
                 if len(pass_list) == 3:
-                    #the row number of file1 data
-                    html_txt1 += "<tr>"
-                    html_txt1 += "<td>File{}</td>".format(file_comp_2)
-                    html_txt1 += "<td>{}</td>".format(pass_list[1])
-                    html_txt1 += "<td>{}</td>".format(pass_list[2])
-                    html_txt1 += "</tr>"
+                    """
+                    if the value has one match
+                    """
+                    html_pass_txt += """<td bgcolor="#6495ED">{}</td>""".format(pass_list[2])
+                    html_pass_txt += "<td>{}</td>".format(1)
+                    html_pass_txt += """<td bgcolor="#7FFF00">{}</td>""".format("PASS")
+                    html_pass_txt += "</tr>"
                 else:
-                    #the row numbers of file2 data findings"
-                    for rows in range(len(file2_pass_list)):
-                        html_txt1 += "<tr>"
-                        html_txt1 += "<td>File{}</td>".format(file_comp_2)
-                        html_txt1 += "<td>{}</td>".format(pass_list[1])
-                        html_txt1 += "<td>{}</td>".format(file2_pass_list[rows])
-                        html_txt1 += "</tr>"
+                    """
+                    if the value has more than one match
+                    """
+                    file2_rows, slice_const = str(file2_pass_list), slice(1, -1)
+                    file2_rows_res = (file2_rows[slice_const])
+
+                    html_pass_txt += """<td bgcolor="#6495ED">{}</td>""".format(file2_rows_res)
+                    html_pass_txt += "<td>{}</td>".format(len(file2_pass_list))
+                    html_pass_txt += """<td bgcolor="#7FFF00">{}</td>""".format("PASS")
+                    html_pass_txt += "</tr>"
 
                 pass_list = []
                 counter = 0
 
-        # html_txt += "</table>"
-        # html_txt += "</body></html>"
+        html_pass_txt += "</table>"
+        html_pass_txt += "</body></html>"
 
         html_txt1 += "</table>"
         html_txt1 += "</body></html>"
-
-        html_file_name_pass = f"file{file_no}"
-        html_file_name_fail = ""
 
         with open(f"file{file_no}fail.html", 'w') as file:
             print(f"\nWriting to file{file_no}fail.html file...")
@@ -128,12 +136,9 @@ class Textdiff:
 
                     <h1>File Comparison Results</h1>"""
             html_top_pass = html_top + "Rows count Processed : {}".format(pass_row_count)
-            pass_final_html = html_top_pass + html_txt1
+            pass_final_html = html_top_pass + html_pass_txt
             file.writelines(pass_final_html)
         print(f"file{file_no}pass.html created")
-
-        # Adding_total_count_to_top_of_hmtl_file
-        #print(pass_row_count, fail_row_count)
 
 
 file_comp_obj = Textdiff()
