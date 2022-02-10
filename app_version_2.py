@@ -112,7 +112,9 @@ class Textdiff:
                                 }
                                 tr:hover {
                                 background-color: #F9E79F;
-                                }   
+                                }
+                                h1 {text-align: center;}
+                                div {text-align: center;}   
                             </style>
                         </head>
                     <body>
@@ -122,7 +124,7 @@ class Textdiff:
         with open(f"file{file_no}fail.html", 'w') as file:
             print(f"\nWriting to file{file_no}fail.html file...")
 
-            html_top_pass = html_top + "Rows count Processed : {}".format(fail_row_count)
+            html_top_pass = html_top + "<div>Rows count Processed : {}</div>".format(fail_row_count)
             fail_final_html = html_top_pass + html_txt
             file.writelines(fail_final_html)
         print(f"file{file_no}fail.html created")
@@ -130,7 +132,7 @@ class Textdiff:
         with open(f"file{file_no}pass.html", 'w') as file:
             print(f"\nWriting to file{file_no}pass.html file...")
 
-            html_top_pass = html_top + "Rows count Processed : {}".format(pass_row_count)
+            html_top_pass = html_top + "<div>Rows count Processed : {}</div>".format(pass_row_count)
             pass_final_html = html_top_pass + html_pass_txt
             file.writelines(pass_final_html)
         print(f"file{file_no}pass.html created")
