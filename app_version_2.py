@@ -96,23 +96,32 @@ class Textdiff:
         html_txt1 += "</table>"
         html_txt1 += "</body></html>"
 
-        with open(f"file{file_no}fail.html", 'w') as file:
-            print(f"\nWriting to file{file_no}fail.html file...")
-            html_top = """<html>
-                    <head>
-                    <style>
-                    table, th, td {
-                      border: 1px solid black;
-                    }
-                    th, td {
-                      padding-top: 5px;
-                      padding-bottom: 5px;
-                    }   
-                    </style>
-                    </head>
+        html_top = """<html>
+                        <head>
+                            <style>
+                                table, th, td {
+                                border: 1px solid white;
+                                border-style: solid;
+                                }
+                                th, td {
+                                padding-top: 5px;
+                                padding-bottom: 5px;
+                                }
+                                tr:nth-child(even) {
+                                background-color: #D6EEEE;
+                                }
+                                tr:hover {
+                                background-color: #F9E79F;
+                                }   
+                            </style>
+                        </head>
                     <body>
 
-                    <h1>File Comparison Results</h1>"""
+                <h1>File Comparison Results</h1>"""
+
+        with open(f"file{file_no}fail.html", 'w') as file:
+            print(f"\nWriting to file{file_no}fail.html file...")
+
             html_top_pass = html_top + "Rows count Processed : {}".format(fail_row_count)
             fail_final_html = html_top_pass + html_txt
             file.writelines(fail_final_html)
@@ -120,21 +129,7 @@ class Textdiff:
 
         with open(f"file{file_no}pass.html", 'w') as file:
             print(f"\nWriting to file{file_no}pass.html file...")
-            html_top = """<html>
-                    <head>
-                    <style>
-                    table, th, td {
-                      border: 1px solid black;
-                    }
-                    th, td {
-                      padding-top: 5px;
-                      padding-bottom: 5px;
-                    }   
-                    </style>
-                    </head>
-                    <body>
 
-                    <h1>File Comparison Results</h1>"""
             html_top_pass = html_top + "Rows count Processed : {}".format(pass_row_count)
             pass_final_html = html_top_pass + html_pass_txt
             file.writelines(pass_final_html)
